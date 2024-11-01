@@ -1,7 +1,9 @@
+from django.shortcuts import render
 from rest_framework import generics
 from rest_framework import viewsets
 from .models import Menu, Booking  # Replace with the actual model name and path if different
 from .serializers import MenuItemSerializer, BookingSerializer
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 def index(request):
@@ -18,6 +20,7 @@ class SingleMenuItemView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = MenuItemSerializer  # Uses MenuSerializer for data handling
 
 class BookingViewSet(viewsets.ModelViewSet):
+    permission_classes = [IsAuthenticated]
     """
     A viewset for viewing and editing booking instances.
     """
